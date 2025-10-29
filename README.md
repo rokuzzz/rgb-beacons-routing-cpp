@@ -1,1 +1,5 @@
-This is a template readme file to enforce main default branch. Edit this file as you see fit.
+Remember to fill out LLM.md
+
+https://plus.tuni.fi/COMP.CS.300/fall-2025/project/content/
+
+
