@@ -117,16 +117,16 @@ public:
     // Short rationale for estimate:  unordered_map find and insert are O(1) average
     bool add_beacon(BeaconID id, Name const& name, Coord xy, Color color);
 
-    // Estimate of performance:
-    // Short rationale for estimate:
+    // Estimate of performance: O(1)
+    // Short rationale for estimate: size() (member function of std::unordered_map class) returns stored value
     int beacon_count();
 
-    // Estimate of performance:
-    // Short rationale for estimate:
+    // Estimate of performance: O(n)
+    // Short rationale for estimate:  destroys all n beacons
     void clear_beacons();
 
-    // Estimate of performance:
-    // Short rationale for estimate:
+    // Estimate of performance: O(n)
+    // Short rationale for estimate: iterates through all n beacons to collect IDs
     std::vector<BeaconID> all_beacons();
 
     // Estimate of performance:
