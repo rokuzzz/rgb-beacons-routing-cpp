@@ -34,10 +34,20 @@ Datastructures::~Datastructures()
 
 }
 
-bool Datastructures::add_beacon(BeaconID /*id*/, const Name& /*name*/, Coord /*xy*/, Color /*color*/)
+bool Datastructures::add_beacon(BeaconID id, const Name& name, Coord xy, Color color)
 {
-    // Replace the line below with your implementation
-    throw NotImplemented();
+    if (beacons_.find(id) != beacons_.end()) {
+        return false;
+    }
+
+    Beacon new_beacon;
+    new_beacon.name = name;
+    new_beacon.xy = xy;
+    new_beacon.color = color;
+
+    beacons_[id] = new_beacon;
+
+    return true;
 }
 
 int Datastructures::beacon_count()

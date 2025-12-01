@@ -113,8 +113,8 @@ public:
 
     // A operations
 
-    // Estimate of performance:
-    // Short rationale for estimate:
+    // Estimate of performance: O(1) average, O(n) worst
+    // Short rationale for estimate:  unordered_map find and insert are O(1) average
     bool add_beacon(BeaconID id, Name const& name, Coord xy, Color color);
 
     // Estimate of performance:
