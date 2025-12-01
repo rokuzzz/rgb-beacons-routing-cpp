@@ -71,22 +71,37 @@ std::vector<BeaconID> Datastructures::all_beacons()
     return keys;
 }
 
-Name Datastructures::get_name(BeaconID /*id*/)
+Name Datastructures::get_name(BeaconID id)
 {
-    // Replace the line below with your implementation
-    throw NotImplemented();
+    auto it = beacons_.find(id);
+
+    if (it != beacons_.end()) {
+        return it->second.name;
+    }
+
+    return NO_NAME;
 }
 
-Coord Datastructures::get_coordinates(BeaconID /*id*/)
+Coord Datastructures::get_coordinates(BeaconID id)
 {
-    // Replace the line below with your implementation
-    throw NotImplemented();
+    auto it = beacons_.find(id);
+
+    if (it != beacons_.end()) {
+        return it->second.xy;
+    }
+
+    return NO_COORD;
 }
 
-Color Datastructures::get_color(BeaconID /*id*/)
+Color Datastructures::get_color(BeaconID id)
 {
-    // Replace the line below with your implementation
-    throw NotImplemented();
+    auto it = beacons_.find(id);
+
+    if (it != beacons_.end()) {
+        return it->second.color;
+    }
+
+    return NO_COLOR;
 }
 
 std::vector<BeaconID> Datastructures::beacons_alphabetically()

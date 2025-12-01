@@ -129,16 +129,16 @@ public:
     // Short rationale for estimate: iterates through all n beacons to collect IDs
     std::vector<BeaconID> all_beacons();
 
-    // Estimate of performance:
-    // Short rationale for estimate:
+    // Estimate of performance: O(1) average, O(n) worst case
+    // Short rationale for estimate: unordered_map find is O(1) average
     Name get_name(BeaconID id);
 
-    // Estimate of performance:
-    // Short rationale for estimate:
+    // Estimate of performance: O(1) average, O(n) worst case
+    // Short rationale for estimate: unordered_map find is O(1) average
     Coord get_coordinates(BeaconID id);
 
-    // Estimate of performance:
-    // Short rationale for estimate:
+    // Estimate of performance: O(1) average, O(n) worst case
+    // Short rationale for estimate: unordered_map find is O(1) average
     Color get_color(BeaconID id);
 
     // We recommend you implement the operations below only after implementing the ones above
