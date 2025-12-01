@@ -240,6 +240,17 @@ private:
 
     // Add stuff needed for your class implementation below
 
+
+    struct Beacon {
+        Name name;
+        Coord xy;
+        Color color;
+        BeaconID target = NO_BEACON; // // NO_BEACON by default = not emitting anywhere
+        std::set<BeaconID> sources; // keeps sorted for get_lightsources() which is called often
+    };
+
+    // O(1) lookup for frequently called get_*() operations
+    std::unordered_map<BeaconID, Beacon> beacons_;
 };
 
 #endif // DATASTRUCTURES_HH
