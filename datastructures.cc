@@ -202,10 +202,15 @@ std::vector<BeaconID> Datastructures::find_beacons(Name const& name)
     return result;
 }
 
-bool Datastructures::change_beacon_name(BeaconID /*id*/, const Name& /*newname*/)
+bool Datastructures::change_beacon_name(BeaconID id, const Name& newname)
 {
-    // Replace the line below with your implementation
-    throw NotImplemented();
+    auto it = beacons_.find(id);
+    if (it != beacons_.end()) {
+        it->second.name = newname;
+        return true;
+    }
+
+    return false;
 }
 
 bool Datastructures::add_lightbeam(BeaconID /*sourceid*/, BeaconID /*targetid*/)

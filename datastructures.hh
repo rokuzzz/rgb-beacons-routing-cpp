@@ -165,8 +165,8 @@ public:
     // Short rationale for estimate: Must check all n beacons to find matches
     std::vector<BeaconID> find_beacons(Name const& name);
 
-    // Estimate of performance:
-    // Short rationale for estimate:
+    // Estimate of performance: O(1) average, O(n) worst case
+    // Short rationale for estimate: unordered_map find is O(1) average, name assignment is O(1)
     bool change_beacon_name(BeaconID id, Name const& newname);
 
     // We recommend you implement the operations below only after implementing the ones above
