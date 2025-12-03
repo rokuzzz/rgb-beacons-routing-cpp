@@ -8,6 +8,8 @@
 #include <utility>
 #include <limits>
 #include <source_location>
+#include <unordered_map>
+#include <set>
 
 // Type for beacon IDs
 using BeaconID = std::string;

@@ -3,6 +3,7 @@
 #include "datastructures.hh"
 
 #include <random>
+#include <algorithm>
 
 std::minstd_rand rand_engine; // Reasonably quick pseudo-random generator
 
@@ -67,7 +68,7 @@ void Datastructures::clear_beacons()
 
 std::vector<BeaconID> Datastructures::all_beacons()
 {
-    vector<BeaconID> keys; // keys are beacon ids
+    std::vector<BeaconID> keys; // keys are beacon ids
 
     for (auto it = beacons_.begin(); it != beacons_.end(); ++it) {
         keys.push_back(it->first);
