@@ -161,8 +161,8 @@ public:
     // Short rationale for estimate: iterates through all n beacons to find maximum
     BeaconID max_brightness();
 
-    // Estimate of performance:
-    // Short rationale for estimate:
+    // Estimate of performance: O(n)
+    // Short rationale for estimate: Must check all n beacons to find matches
     std::vector<BeaconID> find_beacons(Name const& name);
 
     // Estimate of performance:

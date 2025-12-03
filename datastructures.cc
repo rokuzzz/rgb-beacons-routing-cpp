@@ -186,10 +186,20 @@ BeaconID Datastructures::max_brightness()
     return max_id;
 }
 
-std::vector<BeaconID> Datastructures::find_beacons(Name const& /*name*/)
+std::vector<BeaconID> Datastructures::find_beacons(Name const& name)
 {
-    // Replace the line below with your implementation
-    throw NotImplemented();
+    std::vector<BeaconID> result;
+
+    for(auto it = beacons_.begin(); it != beacons_.end(); ++it) {
+        BeaconID id = it->first;
+        Beacon& beacon = it->second;
+
+        if (beacon.name == name) {
+            result.push_back(id);
+        }
+    }
+
+    return result;
 }
 
 bool Datastructures::change_beacon_name(BeaconID /*id*/, const Name& /*newname*/)
