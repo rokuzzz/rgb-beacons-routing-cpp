@@ -151,12 +151,12 @@ public:
     // Short rationale for estimate:
     std::vector<BeaconID> beacons_brightness_increasing();
 
-    // Estimate of performance:
-    // Short rationale for estimate:
+    // Estimate of performance: O(n)
+    // Short rationale for estimate: iterates through all n beacons to find minimum
     BeaconID min_brightness();
 
-    // Estimate of performance:
-    // Short rationale for estimate:
+    // Estimate of performance: O(n)
+    // Short rationale for estimate: iterates through all n beacons to find maximum
     BeaconID max_brightness();
 
     // Estimate of performance:
@@ -251,6 +251,9 @@ private:
 
     // O(1) lookup for frequently called get_*() operations
     std::unordered_map<BeaconID, Beacon> beacons_;
+
+    // Helper function to calculate brightness from RGB color
+    int calculate_brightness(const Color& color) const;
 };
 
 #endif // DATASTRUCTURES_HH

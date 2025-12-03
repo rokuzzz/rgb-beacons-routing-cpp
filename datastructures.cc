@@ -34,6 +34,11 @@ Datastructures::~Datastructures()
 
 }
 
+int Datastructures::calculate_brightness(const Color& color) const
+{
+    return 3 * color.r + 6 * color.g + color.b;
+}
+
 bool Datastructures::add_beacon(BeaconID id, const Name& name, Coord xy, Color color)
 {
     if (beacons_.find(id) != beacons_.end()) {
@@ -118,14 +123,50 @@ std::vector<BeaconID> Datastructures::beacons_brightness_increasing()
 
 BeaconID Datastructures::min_brightness()
 {
-    // Replace the line below with your implementation
-    throw NotImplemented();
+    if (beacons_.empty()) {
+        return NO_BEACON;
+    }
+
+    auto it = beacons_.begin();
+    BeaconID min_id = it->first;
+    int min_brightness = calculate_brightness(it->second.color);
+
+    ++it; // start from the second element
+    for (; it != beacons_.end(); ++it) {
+        BeaconID id = it->first;
+        int brightness = calculate_brightness(it->second.color);
+
+        if (min_brightness > brightness) {
+            min_brightness = brightness;
+            min_id = id;
+        }
+    }
+
+    return min_id;
 }
 
 BeaconID Datastructures::max_brightness()
 {
-    // Replace the line below with your implementation
-    throw NotImplemented();
+    if (beacons_.empty()) {
+        return NO_BEACON;
+    }
+
+    auto it = beacons_.begin();
+    BeaconID max_id = it->first;
+    int max_brightness = calculate_brightness(it->second.color);
+
+    ++it;
+    for(; it != beacons_.end(); ++it) {
+        BeaconID id = it->first;
+        int brightness = calculate_brightness(it->second.color);
+
+        if (max_brightness < brightness) {
+            max_brightness = brightness;
+            max_id = id;
+        }
+    }
+
+    return max_id;
 }
 
 std::vector<BeaconID> Datastructures::find_beacons(Name const& /*name*/)
