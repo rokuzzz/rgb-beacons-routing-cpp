@@ -111,8 +111,15 @@ Color Datastructures::get_color(BeaconID id)
 
 std::vector<BeaconID> Datastructures::beacons_alphabetically()
 {
-    // Replace the line below with your implementation
-    throw NotImplemented();
+    std::vector<BeaconID> result = all_beacons();
+
+    // Sort by beacon name alphabetically
+    std::sort(result.begin(), result.end(),
+        [this](const BeaconID& a, const BeaconID& b) {
+            return beacons_[a].name < beacons_[b].name;
+        });
+
+    return result;
 }
 
 std::vector<BeaconID> Datastructures::beacons_brightness_increasing()
