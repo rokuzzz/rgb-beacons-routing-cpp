@@ -144,11 +144,11 @@ public:
     // We recommend you implement the operations below only after implementing the ones above
 
     // Estimate of performance: O(n log n)
-    // Short rationale for estimate: Sorting n beacons using std::sort with string comparison
+    // Short rationale for estimate: Sorting n beacons using std::sort with name comparison
     std::vector<BeaconID> beacons_alphabetically();
 
-    // Estimate of performance:
-    // Short rationale for estimate:
+    // Estimate of performance: O(n log n)
+    // Short rationale for estimate: Sorting n beacons using std::sort with brightness comparison
     std::vector<BeaconID> beacons_brightness_increasing();
 
     // Estimate of performance: O(n)

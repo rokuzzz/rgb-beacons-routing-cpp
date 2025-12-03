@@ -124,8 +124,17 @@ std::vector<BeaconID> Datastructures::beacons_alphabetically()
 
 std::vector<BeaconID> Datastructures::beacons_brightness_increasing()
 {
-    // Replace the line below with your implementation
-    throw NotImplemented();
+    std::vector<BeaconID> result = all_beacons();
+
+    // Sort by beacon brightness
+    std::sort(result.begin(), result.end(),
+        [this](const BeaconID& a, const BeaconID& b) {
+            int brightness_a = calculate_brightness(beacons_[a].color);
+            int brightness_b = calculate_brightness(beacons_[b].color);
+            return brightness_a < brightness_b;
+    });
+
+    return result;
 }
 
 BeaconID Datastructures::min_brightness()
