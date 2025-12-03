@@ -213,10 +213,26 @@ bool Datastructures::change_beacon_name(BeaconID id, const Name& newname)
     return false;
 }
 
-bool Datastructures::add_lightbeam(BeaconID /*sourceid*/, BeaconID /*targetid*/)
+bool Datastructures::add_lightbeam(BeaconID sourceid, BeaconID targetid)
 {
-    // Replace the line below with your implementation
-    throw NotImplemented();
+    auto source_it = beacons_.find(sourceid);
+    if (source_it == beacons_.end()) {
+        return false;  // source not found
+    }
+
+    auto target_it = beacons_.find(targetid);
+    if (target_it == beacons_.end()) {
+        return false;  // target not found
+    }
+
+    if (source_it->second.target != NO_BEACON) {
+        return false;  // source beacon is already sending light to another beacon
+    }
+
+    source_it->second.target = targetid;
+    target_it->second.sources.insert(sourceid);
+
+    return true;
 }
 
 std::vector<BeaconID> Datastructures::get_lightsources(BeaconID /*id*/)

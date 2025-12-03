@@ -171,8 +171,8 @@ public:
 
     // We recommend you implement the operations below only after implementing the ones above
 
-    // Estimate of performance:
-    // Short rationale for estimate:
+    // Estimate of performance: O(log k), k = number of sources at target
+    // Short rationale for estimate: Two O(1) average map lookups, one O(log k) set insertion
     bool add_lightbeam(BeaconID sourceid, BeaconID targetid);
 
     // Estimate of performance:
