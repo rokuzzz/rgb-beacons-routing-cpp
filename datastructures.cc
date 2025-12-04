@@ -250,10 +250,28 @@ std::vector<BeaconID> Datastructures::get_lightsources(BeaconID id)
     return result;
 }
 
-std::vector<BeaconID> Datastructures::path_outbeam(BeaconID /*id*/)
+std::vector<BeaconID> Datastructures::path_outbeam(BeaconID id)
 {
-    // Replace the line below with your implementation
-    throw NotImplemented();
+    std::vector<BeaconID> result;
+
+    // Check if starting beacon exists
+    auto it = beacons_.find(id);
+    if (it == beacons_.end()) {
+        return {NO_BEACON};
+    }
+
+    BeaconID current = id;
+
+    // Add starting beacon
+    result.push_back(current);
+
+    // Follow the path
+    while (beacons_[current].target != NO_BEACON) {
+        current = beacons_[current].target;  // move to target
+        result.push_back(current);           // add to result
+    }
+
+    return result;
 }
 
 std::vector<BeaconID> Datastructures::path_inbeam_longest(BeaconID /*id*/)
