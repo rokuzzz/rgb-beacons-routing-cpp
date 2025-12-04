@@ -235,10 +235,19 @@ bool Datastructures::add_lightbeam(BeaconID sourceid, BeaconID targetid)
     return true;
 }
 
-std::vector<BeaconID> Datastructures::get_lightsources(BeaconID /*id*/)
+std::vector<BeaconID> Datastructures::get_lightsources(BeaconID id)
 {
-    // Replace the line below with your implementation
-    throw NotImplemented();
+    auto it = beacons_.find(id);
+
+    // Check if beacon exists
+    if (it == beacons_.end()) {
+        return {};  // Return empty vector
+    }
+
+    // Convert set to vector (already sorted)
+    std::vector<BeaconID> result(it->second.sources.begin(), it->second.sources.end());
+
+    return result;
 }
 
 std::vector<BeaconID> Datastructures::path_outbeam(BeaconID /*id*/)

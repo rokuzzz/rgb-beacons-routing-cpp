@@ -175,8 +175,8 @@ public:
     // Short rationale for estimate: Two O(1) average map lookups, one O(log k) set insertion
     bool add_lightbeam(BeaconID sourceid, BeaconID targetid);
 
-    // Estimate of performance:
-    // Short rationale for estimate:
+    // Estimate of performance: O(k), k = number of sources
+    // Short rationale for estimate: O(1) map lookup, O(k) to copy k sources from set to vector
     std::vector<BeaconID> get_lightsources(BeaconID id);
 
     // Estimate of performance:
