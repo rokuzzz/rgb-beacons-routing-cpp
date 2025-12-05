@@ -202,8 +202,8 @@ public:
     // Short rationale for estimate:
     std::vector<Coord> all_xpoints();
 
-    // Estimate of performance:
-    // Short rationale for estimate:
+    // Estimate of performance: O(k), k = number of fibers from xpoint
+    // Short rationale for estimate: O(log n) to check if xpoint exists, O(k) to copy k fibers to vector
     std::vector<std::pair<Coord, Cost>> get_fibres_from(Coord xpoint);
 
     // Estimate of performance:

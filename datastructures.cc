@@ -311,10 +311,18 @@ std::vector<Coord> Datastructures::all_xpoints()
     throw NotImplemented();
 }
 
-std::vector<std::pair<Coord, Cost> > Datastructures::get_fibres_from(Coord /*xpoint*/)
+std::vector<std::pair<Coord, Cost> > Datastructures::get_fibres_from(Coord xpoint)
 {
-    // Replace the line below with your implementation
-    throw NotImplemented();
+    if(fiber_network_.find(xpoint) == fiber_network_.end()) {
+        return {};
+    }
+
+    std::vector<std::pair<Coord, Cost>> result;
+    for (const auto& [coord, cost] : fiber_network_[xpoint]) {
+        result.push_back({coord, cost});
+    }
+
+    return result;
 }
 
 std::vector<std::pair<Coord, Coord> > Datastructures::all_fibres()
