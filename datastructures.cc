@@ -286,10 +286,23 @@ Color Datastructures::total_color(BeaconID /*id*/)
     throw NotImplemented();
 }
 
-bool Datastructures::add_fibre(Coord /*xpoint1*/, Coord /*xpoint2*/, Cost /*cost*/)
+bool Datastructures::add_fibre(Coord xpoint1, Coord xpoint2, Cost cost)
 {
-    // Replace the line below with your implementation
-    throw NotImplemented();
+    // Check if points are the same
+    if (xpoint1 == xpoint2) {
+        return false;
+    }
+
+    // Check if connection already exists
+    if (fiber_network_[xpoint1].count(xpoint2)) {
+        return false;
+    }
+
+    // Add fiber in BOTH directions
+    fiber_network_[xpoint1][xpoint2] = cost;
+    fiber_network_[xpoint2][xpoint1] = cost;
+
+    return true;
 }
 
 std::vector<Coord> Datastructures::all_xpoints()
@@ -318,8 +331,7 @@ bool Datastructures::remove_fibre(Coord /*xpoint1*/, Coord /*xpoint2*/)
 
 void Datastructures::clear_fibres()
 {
-    // Replace the line below with your implementation
-    throw NotImplemented();
+    fiber_network_.clear();
 }
 
 std::vector<std::pair<Coord, Cost> > Datastructures::route_any(Coord /*fromxpoint*/, Coord /*toxpoint*/)

@@ -8,6 +8,7 @@
 #include <utility>
 #include <limits>
 #include <source_location>
+#include <map>
 #include <unordered_map>
 #include <set>
 
@@ -179,8 +180,8 @@ public:
     // Short rationale for estimate: O(1) map lookup, O(k) to copy k sources from set to vector
     std::vector<BeaconID> get_lightsources(BeaconID id);
 
-    // Estimate of performance:
-    // Short rationale for estimate:
+    // Estimate of performance: (k), k = path length
+    // Short rationale for estimate: Visit each beacon in path once, O(1) average map access per beacon
     std::vector<BeaconID> path_outbeam(BeaconID id);
 
     // B operations
@@ -193,8 +194,8 @@ public:
     // Short rationale for estimate:
     Color total_color(BeaconID id);
 
-    // Estimate of performance:
-    // Short rationale for estimate:
+    // Estimate of performance: O(log k), k = number of fibers at a coordinate
+    // Short rationale for estimate: Two O(1) average lookups, two O(log k) map insertions
     bool add_fibre(Coord xpoint1, Coord xpoint2, Cost cost);
 
     // Estimate of performance:
@@ -213,8 +214,8 @@ public:
     // Short rationale for estimate:
     bool remove_fibre(Coord xpoint1, Coord xpoint2);
 
-    // Estimate of performance:
-    // Short rationale for estimate:
+    // Estimate of performance: O(n)
+    // Short rationale for estimate: Clearing unordered_map visits each element once
     void clear_fibres();
 
     // We recommend you implement the operations below only after implementing the ones above
@@ -253,6 +254,9 @@ private:
 
     // O(1) lookup for frequently called get_*() operations
     std::unordered_map<BeaconID, Beacon> beacons_;
+
+    // Maps from coordinate to a map of {destination coord -> cost}
+    std::unordered_map<Coord, std::map<Coord, Cost>, CoordHash> fiber_network_;
 
     // Helper function to calculate brightness from RGB color
     int calculate_brightness(const Color& color) const;
