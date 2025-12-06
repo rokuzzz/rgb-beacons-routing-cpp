@@ -347,10 +347,16 @@ std::vector<std::pair<Coord, Coord>> Datastructures::all_fibres()
     return result;
 }
 
-bool Datastructures::remove_fibre(Coord /*xpoint1*/, Coord /*xpoint2*/)
+bool Datastructures::remove_fibre(Coord xpoint1, Coord xpoint2)
 {
-    // Replace the line below with your implementation
-    throw NotImplemented();
+    if(fiber_network_[xpoint1].count(xpoint2) == 0) {
+        return false;
+    }
+
+    fiber_network_[xpoint1].erase(xpoint2);
+    fiber_network_[xpoint2].erase(xpoint1);
+
+    return true;
 }
 
 void Datastructures::clear_fibres()

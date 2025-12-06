@@ -210,8 +210,8 @@ public:
     // Short rationale for estimate: Iterate through 2m bidirectional entries O(m), sort m fibers O(m log m)
     std::vector<std::pair<Coord, Coord>> all_fibres();
 
-    // Estimate of performance:
-    // Short rationale for estimate:
+    // Estimate of performance: O(log k), k = number of fibers at coordinate
+    // Short rationale for estimate: Search in inner map at one coordinate O(log k), erase O(log k)
     bool remove_fibre(Coord xpoint1, Coord xpoint2);
 
     // Estimate of performance: O(n)
