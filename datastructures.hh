@@ -198,8 +198,8 @@ public:
     // Short rationale for estimate: Two O(1) average lookups, two O(log k) map insertions
     bool add_fibre(Coord xpoint1, Coord xpoint2, Cost cost);
 
-    // Estimate of performance:
-    // Short rationale for estimate:
+    // Estimate of performance: O(n log n)
+    // Short rationale for estimate: Insert n coordinates into set O(n log n), convert to vector O(n)
     std::vector<Coord> all_xpoints();
 
     // Estimate of performance: O(k), k = number of fibers from xpoint

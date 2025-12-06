@@ -307,8 +307,12 @@ bool Datastructures::add_fibre(Coord xpoint1, Coord xpoint2, Cost cost)
 
 std::vector<Coord> Datastructures::all_xpoints()
 {
-    // Replace the line below with your implementation
-    throw NotImplemented();
+    std::set<Coord> points_set;
+    for(const auto& [coord, cost] : fiber_network_) {
+        points_set.insert(coord);
+    }
+
+    return std::vector<Coord>(points_set.begin(), points_set.end());
 }
 
 std::vector<std::pair<Coord, Cost> > Datastructures::get_fibres_from(Coord xpoint)
