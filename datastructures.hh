@@ -190,8 +190,8 @@ public:
     // Short rationale for estimate:
     std::vector<BeaconID> path_inbeam_longest(BeaconID id);
 
-    // Estimate of performance:
-    // Short rationale for estimate:
+    // Estimate of performance: O(n)
+    // Short rationale for estimate: Recursive traversal may visit all beacons in worst case chain
     Color total_color(BeaconID id);
 
     // Estimate of performance: O(log k), k = number of fibers at a coordinate

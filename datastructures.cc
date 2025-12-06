@@ -280,10 +280,34 @@ std::vector<BeaconID> Datastructures::path_inbeam_longest(BeaconID /*id*/)
     throw NotImplemented();
 }
 
-Color Datastructures::total_color(BeaconID /*id*/)
+Color Datastructures::total_color(BeaconID id)
 {
-    // Replace the line below with your implementation
-    throw NotImplemented();
+    auto it = beacons_.find(id);
+    if (it == beacons_.end()) {
+        return NO_COLOR;
+    }
+
+    Beacon& beacon = it->second;
+
+    int sum_r = beacon.color.r;
+    int sum_g = beacon.color.g;
+    int sum_b = beacon.color.b;
+    int count = 1;
+
+    for (const BeaconID& source_id : beacon.sources) {
+        Color source_total = total_color(source_id);
+
+        sum_r += source_total.r;
+        sum_g += source_total.g;
+        sum_b += source_total.b;
+        count += 1;
+    }
+
+    int total_r = sum_r/count;
+    int total_g = sum_g/count;
+    int total_b = sum_b/count;
+
+    return Color{total_r, total_g, total_b};
 }
 
 bool Datastructures::add_fibre(Coord xpoint1, Coord xpoint2, Cost cost)
