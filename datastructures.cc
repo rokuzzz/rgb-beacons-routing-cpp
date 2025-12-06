@@ -329,10 +329,22 @@ std::vector<std::pair<Coord, Cost> > Datastructures::get_fibres_from(Coord xpoin
     return result;
 }
 
-std::vector<std::pair<Coord, Coord> > Datastructures::all_fibres()
+std::vector<std::pair<Coord, Coord>> Datastructures::all_fibres()
 {
-    // Replace the line below with your implementation
-    throw NotImplemented();
+    std::vector<std::pair<Coord, Coord>> result;
+
+    // Collect all fibers, avoiding duplicates by only including pairs where coord1 < coord2
+    for (const auto& [coord1, neighbours] : fiber_network_) {
+        for (const auto& [coord2, cost] : neighbours) {
+            if (coord1 < coord2) {
+                result.push_back({coord1, coord2});
+            }
+        }
+    }
+
+    // Sort automatically using Coord's operator "<" (compares Y first, then X)
+    std::sort(result.begin(), result.end());
+    return result;
 }
 
 bool Datastructures::remove_fibre(Coord /*xpoint1*/, Coord /*xpoint2*/)

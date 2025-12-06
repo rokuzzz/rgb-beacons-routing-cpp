@@ -206,8 +206,8 @@ public:
     // Short rationale for estimate: O(log n) to check if xpoint exists, O(k) to copy k fibers to vector
     std::vector<std::pair<Coord, Cost>> get_fibres_from(Coord xpoint);
 
-    // Estimate of performance:
-    // Short rationale for estimate:
+    // Estimate of performance: O(m log m), m = number of fibers
+    // Short rationale for estimate: Iterate through 2m bidirectional entries O(m), sort m fibers O(m log m)
     std::vector<std::pair<Coord, Coord>> all_fibres();
 
     // Estimate of performance:
