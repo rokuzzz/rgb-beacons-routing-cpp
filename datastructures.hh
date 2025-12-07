@@ -220,8 +220,8 @@ public:
 
     // We recommend you implement the operations below only after implementing the ones above
 
-    // Estimate of performance:
-    // Short rationale for estimate:
+    // Estimate of performance: O(n + m), n = coords, m = fibers
+    // Short rationale for estimate: BFS visits each coordinate once and checks each fiber once
     std::vector<std::pair<Coord, Cost>> route_any(Coord fromxpoint, Coord toxpoint);
 
     // C operations
@@ -258,8 +258,16 @@ private:
     // Maps from coordinate to a map of {destination coord -> cost}
     std::unordered_map<Coord, std::map<Coord, Cost>, CoordHash> fiber_network_;
 
-    // Helper function to calculate brightness from RGB color
+    // HELPER FUNCTIONS
+
+    // Calculate brightness from RGB color
     int calculate_brightness(const Color& color) const;
+
+    std::vector<std::pair<Coord, Cost>> reconstruct_path(
+        Coord from,
+        Coord to,
+        std::unordered_map<Coord, Coord, CoordHash>& parent,
+        std::unordered_map<Coord, Cost, CoordHash>& cost_to);
 };
 
 #endif // DATASTRUCTURES_HH
