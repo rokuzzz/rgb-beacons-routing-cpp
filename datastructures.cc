@@ -274,10 +274,33 @@ std::vector<BeaconID> Datastructures::path_outbeam(BeaconID id)
     return result;
 }
 
-std::vector<BeaconID> Datastructures::path_inbeam_longest(BeaconID /*id*/)
+std::vector<BeaconID> Datastructures::path_inbeam_longest(BeaconID id)
 {
-    // Replace the line below with your implementation
-    throw NotImplemented();
+    auto it = beacons_.find(id);
+    if (it == beacons_.end()) {
+        return {NO_BEACON};
+    }
+
+    Beacon& beacon = it->second;
+
+    // Recursion base case: no source beams
+    if (beacon.sources.empty()) {
+        return {id};
+    }
+
+    std::vector<BeaconID> longest_path;
+
+    // Check all source paths, keep the longest
+    for (const BeaconID& source_id : beacon.sources) {
+        std::vector<BeaconID> source_path = path_inbeam_longest(source_id);
+        source_path.push_back(id);
+
+        if (source_path.size() > longest_path.size()) {
+            longest_path = source_path;
+        }
+    }
+
+    return longest_path;
 }
 
 Color Datastructures::total_color(BeaconID id)
@@ -289,11 +312,14 @@ Color Datastructures::total_color(BeaconID id)
 
     Beacon& beacon = it->second;
 
+    // Init with beacon's own color
     int sum_r = beacon.color.r;
     int sum_g = beacon.color.g;
     int sum_b = beacon.color.b;
     int count = 1;
 
+    // Add colors from all incoming lightbeams
+    // Get combined color from each source (recursion needed because sources also mix colors)
     for (const BeaconID& source_id : beacon.sources) {
         Color source_total = total_color(source_id);
 
@@ -303,6 +329,7 @@ Color Datastructures::total_color(BeaconID id)
         count += 1;
     }
 
+    // Calculate avg color
     int total_r = sum_r/count;
     int total_g = sum_g/count;
     int total_b = sum_b/count;

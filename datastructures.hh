@@ -186,8 +186,8 @@ public:
 
     // B operations
 
-    // Estimate of performance:
-    // Short rationale for estimate:
+    // Estimate of performance: O(n)
+    // Short rationale for estimate: Recursively go through all source paths to find the longest
     std::vector<BeaconID> path_inbeam_longest(BeaconID id);
 
     // Estimate of performance: O(n)
