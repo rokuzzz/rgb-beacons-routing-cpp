@@ -5,6 +5,7 @@
 #include <random>
 #include <algorithm>
 #include <queue>
+#include <unordered_set>
 
 std::minstd_rand rand_engine; // Reasonably quick pseudo-random generator
 
@@ -480,10 +481,48 @@ std::vector<std::pair<Coord, Cost> > Datastructures::route_any(Coord fromxpoint,
     return {};  // No path found
 }
 
-std::vector<std::pair<Coord, Cost>> Datastructures::route_least_xpoints(Coord /*fromxpoint*/, Coord /*toxpoint*/)
+std::vector<std::pair<Coord, Cost>> Datastructures::route_least_xpoints(Coord fromxpoint, Coord toxpoint)
 {
-    // Replace the line below with your implementation
-    throw NotImplemented();
+    if (fromxpoint == toxpoint) {
+        return {{fromxpoint, 0}};
+    }
+
+    if (fiber_network_.find(fromxpoint) == fiber_network_.end()) {
+        return {};
+    }
+
+    // BFS init
+    std::queue<Coord> q;
+    std::unordered_set<Coord, CoordHash> visited;
+    std::unordered_map<Coord, Coord, CoordHash> parent;
+    std::unordered_map<Coord, Cost, CoordHash> cost_to;
+
+    q.push(fromxpoint);
+    visited.insert(fromxpoint);
+    cost_to[fromxpoint] = 0;
+
+    // BFS main loop
+    while (!q.empty()) {
+        Coord current = q.front();
+        q.pop();
+
+        // Found target
+        if (current == toxpoint) {
+            return reconstruct_path(fromxpoint, toxpoint, parent, cost_to);
+        }
+
+        // Check all neighbours
+        for (const auto& [neighbor, fiber_cost] : fiber_network_[current]) {
+            if (visited.find(neighbor) == visited.end()) {
+                visited.insert(neighbor);
+                parent[neighbor] = current;
+                cost_to[neighbor] = cost_to[current] + fiber_cost;
+                q.push(neighbor);
+            }
+        }
+    }
+
+    return {};  // No path found
 }
 
 std::vector<std::pair<Coord, Cost>> Datastructures::route_fastest(Coord /*fromxpoint*/, Coord /*toxpoint*/)

@@ -226,8 +226,8 @@ public:
 
     // C operations
 
-    // Estimate of performance:
-    // Short rationale for estimate:
+    // Estimate of performance: O(n + m), n = coordinates, m = fibers
+    // Short rationale for estimate: BFS naturally finds path with fewest nodes by exploring level by level
     std::vector<std::pair<Coord, Cost>> route_least_xpoints(Coord fromxpoint, Coord toxpoint);
 
     // Estimate of performance:
